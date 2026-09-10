@@ -23,7 +23,7 @@ reconfiguring CTX is not part of an unrelated Issue.
 2. Read the complete Issue description and all comments.
 3. Read relevant `control/docs/`, repository rules, Project fields, and any
    functional specification before technical work.
-4. Add the Issue to the `Platform Workflow` Project and set Status, Type,
+4. Add the Issue to the `Platform Workflow` Project and set Status, Work Type,
    Priority, Owner, Scope, Evidence, and Module only when known from evidence.
 5. Use exactly one active implementation agent per Issue; record the agent as
    `agent:codex` or `agent:claude`.
@@ -105,6 +105,12 @@ domain-specific path merely to make the workflow easier to describe. Preserve
 decided existing behavior unless the Issue explicitly changes it.
 
 ## Identity and audit
+
+Before every GitHub write, run `gh api user --jq .login` and require an exact
+match for the assigned agent: `agent:codex` → `levtos-codex`, `agent:claude` →
+`levtos-claude` (Benni → `Levtos-Acc`). On mismatch, do not write, run
+`gh auth switch`, or fall back to another account; report a blocker. See the
+[identity detail rule](docs/workflow/agent-orchestration.md#github-identity-preflight).
 
 The GitHub actor must be recorded separately for commit author, push actor,
 PR actor, merge actor, workflow actor, and release actor. A different commit
