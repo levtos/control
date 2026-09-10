@@ -17,56 +17,53 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PROJECT_SYNC_TOKEN }}
           REPO_OWNER: Levtos
-          PROJECT_TITLE: Platform Workflow
+          PROJECT_OWNER: Levtos
+          PROJECT_NUMBER: "1"
         shell: bash
         run: |
           set -euo pipefail
 
-          echo "Step 1: Resolve personal project via GraphQL..."
+          echo "Step 1: Resolve organization project via GraphQL..."
 
           project_json=$(
-            gh api graphql -f query='query {
-              viewer {
-                login
-                projectsV2(first: 100) {
-                  nodes {
+            gh api graphql \
+              -F login="$PROJECT_OWNER" \
+              -F number="$PROJECT_NUMBER" \
+              -f query='query($login: String!, $number: Int!) {
+                viewer {
+                  login
+                }
+                organization(login: $login) {
+                  projectV2(number: $number) {
                     id
                     number
                     title
                   }
                 }
-              }
-            }'
+              }'
           )
 
           VIEWER=$(jq -r '.data.viewer.login' <<< "$project_json")
-          PROJECT_ID=$(
-            jq -r --arg title "$PROJECT_TITLE" \
-              '.data.viewer.projectsV2.nodes[] | select(.title == $title) | .id' \
-              <<< "$project_json" | head -n 1
-          )
-          PROJECT_NUMBER=$(
-            jq -r --arg title "$PROJECT_TITLE" \
-              '.data.viewer.projectsV2.nodes[] | select(.title == $title) | .number' \
-              <<< "$project_json" | head -n 1
-          )
+          PROJECT_ID=$(jq -r '.data.organization.projectV2.id' <<< "$project_json")
+          PROJECT_TITLE=$(jq -r '.data.organization.projectV2.title' <<< "$project_json")
 
-          if [[ -z "$PROJECT_ID" || "$PROJECT_ID" == "null" || -z "$PROJECT_NUMBER" || "$PROJECT_NUMBER" == "null" ]]; then
-            echo "ERROR: Personal project '$PROJECT_TITLE' was not found for authenticated user '$VIEWER'."
+          if [[ -z "$PROJECT_ID" || "$PROJECT_ID" == "null" ]]; then
+            echo "ERROR: Organization project '$PROJECT_OWNER/#$PROJECT_NUMBER' was not accessible to '$VIEWER'."
             exit 1
           fi
 
           echo "Authenticated as: $VIEWER"
-          echo "Using project: $PROJECT_TITLE (#$PROJECT_NUMBER)"
+          echo "Using organization project: $PROJECT_OWNER/$PROJECT_TITLE (#$PROJECT_NUMBER)"
           echo ""
 
           echo "Step 2: Get issues already in the project..."
 
           already=$(
             gh api graphql --paginate \
+              -F login="$PROJECT_OWNER" \
               -F number="$PROJECT_NUMBER" \
-              -f query='query($number: Int!, $endCursor: String) {
-                viewer {
+              -f query='query($login: String!, $number: Int!, $endCursor: String) {
+                organization(login: $login) {
                   projectV2(number: $number) {
                     items(first: 100, after: $endCursor) {
                       nodes {
@@ -85,7 +82,7 @@ jobs:
                   }
                 }
               }' \
-              --jq '.data.viewer.projectV2.items.nodes[] | select(.content.__typename == "Issue") | .content.url'
+              --jq '.data.organization.projectV2.items.nodes[] | select(.content.__typename == "Issue") | .content.url'
           )
 
           already_count=$(printf "%s\n" "$already" | grep -c '^https://' || true)
