@@ -27,6 +27,32 @@ Exactly one of the two agents owns implementation for an Issue, recorded as
 `agent:codex` or `agent:claude`. This is per-Issue ownership, not a permanent
 repository lock; both agents may work in any active repository when assigned.
 
+## GitHub identity preflight
+
+The binding GitHub identity mapping is:
+
+| Role | GitHub account |
+| --- | --- |
+| Benni | `Levtos-Acc` |
+| `agent:codex` | `levtos-codex` |
+| `agent:claude` | `levtos-claude` |
+
+Before every writing GitHub action, the acting agent must run
+`gh api user --jq .login` and verify that the result exactly matches the account
+assigned to that agent. This applies to every write, including pushes, Issue
+and Project updates, PR creation or updates, merges, workflow dispatches, tags,
+and releases; an earlier session check does not replace this preflight.
+
+If the actor does not match, the agent must not perform the write, must not run
+`gh auth switch`, and must not fall back to another account. Report the identity
+mismatch as a blocker. If the check fails or the actor cannot be verified, the
+write is blocked as well.
+
+Commit author and GitHub actor remain distinct evidence. Record commit author,
+push actor, PR actor, merge actor, workflow actor, and release actor separately;
+a commit author line does not prove which GitHub account performed an action.
+Never include tokens or other credentials in this evidence.
+
 ## Assignment types
 
 ### Read-only evidence
