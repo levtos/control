@@ -1,3 +1,5 @@
+> A2-Freigabe durch Benni am 20.10.2026 einschließlich K1–K8. Originale jetzt unter assets/herde/ übernommen; Merge/Release/Live bleiben gesperrt. Die folgende A1-Planung bleibt als Provenienz.
+
 # Einhorn-Herde — Alpha-10-Design und Übernahmeplan
 
 20.10.2026 · [control#60](https://github.com/Levtos/control/issues/60)
