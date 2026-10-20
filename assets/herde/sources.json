@@ -1,0 +1,272 @@
+[
+  {
+    "name": "blinzel-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "7c76d2f03dc36f7c4141d63889dc478b2d5d66582177c45397cd0fa512c53d4b",
+    "alpha_bbox": [
+      33,
+      11,
+      1010,
+      1536
+    ]
+  },
+  {
+    "name": "blinzel-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "27e47dfe4b73d2977dbbdc82befc32baf3b6ec4885b05447412ba824bb5726e8",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "funkel-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "daf2aed1e2012c11e1bb15e759f56fe9785d495dc60bc0d631a1cf3842d87a9e",
+    "alpha_bbox": [
+      0,
+      0,
+      1018,
+      1520
+    ]
+  },
+  {
+    "name": "funkel-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "41fc26001c8afd9c55d8a7ba9b70f7c3e6220395a99f332006148c78d73a0283",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "kuschel-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "d956dfece08db7c8d261bb20833d886d65dfe61a396ac03f1f327606056c9e3c",
+    "alpha_bbox": [
+      0,
+      0,
+      996,
+      1536
+    ]
+  },
+  {
+    "name": "kuschel-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "8738e61f4e21f301ae533cccf9b3465ac160c73fa813c0f809b75078092d9810",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "pfoertchen-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "dae2af10c297cc56cd6ca19cf7a4e56d1fec7b610d6f412bbccfb25f8223024a",
+    "alpha_bbox": [
+      0,
+      5,
+      1010,
+      1536
+    ]
+  },
+  {
+    "name": "pfoertchen-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "7368fe4ca2146ee5b474a2370dea4fc90c116a0cf21244722c86ed44cfc08521",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "schlummer-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "4a1105c7eb701457b8efa34a5729a687d42d072c7e1ec5887e18f038bd19a358",
+    "alpha_bbox": [
+      0,
+      5,
+      1010,
+      1505
+    ]
+  },
+  {
+    "name": "schlummer-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "3ad5f9c3812d393c55b3421b2b90b82b8c5a6e3f6c9a8c9b21016560f5a59b2b",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "schnueffel-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "55e46ec821ef06358a015fd25ec8ccf193e06618cd65ea88222ad525628aaf8b",
+    "alpha_bbox": [
+      0,
+      17,
+      1024,
+      1536
+    ]
+  },
+  {
+    "name": "schnueffel-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "76b6f6e1ec2aaf4a4b38b8e8a7d7cc0a202481b675d89224cccaa9f1b60890b1",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "traber-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "8847ef8188e94aad934eca074b92208a8c29c74b82ed39d70501123371d18a06",
+    "alpha_bbox": [
+      0,
+      5,
+      1016,
+      1536
+    ]
+  },
+  {
+    "name": "traber-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "cc3e77f0ce3c913caf9d059dc38b4554248b966b1f504d44c3589e23c251de8f",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "traeller-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "115b570b5d6ffa977485c501046fe9afad3ae06e45da1cb956aaa7763ac50f46",
+    "alpha_bbox": [
+      0,
+      0,
+      970,
+      1500
+    ]
+  },
+  {
+    "name": "traeller-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "6512fb7e264e4a540c7d0e496b3dd7c6ad1ec29ec9b0b40b65a18fa476959102",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  },
+  {
+    "name": "wuschel-figur.png",
+    "size": [
+      1024,
+      1536
+    ],
+    "mode": "RGBA",
+    "sha256": "3da531a99b619cfed9217856ac43703069340cfa5da76962e2d93b95f5c52f75",
+    "alpha_bbox": [
+      0,
+      8,
+      1014,
+      1536
+    ]
+  },
+  {
+    "name": "wuschel-icon.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "1e7b08b54a638395bafba5770d28b7b9971d72a44853535c30523a99e495e3d2",
+    "alpha_bbox": [
+      0,
+      0,
+      1254,
+      1254
+    ]
+  }
+]
