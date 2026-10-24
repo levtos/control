@@ -30,6 +30,7 @@ The original process decision is recorded in
 
 ## Documents
 
+- [Working rules for agents](working-rules.md) — autonomy, retries, hard stops, Issue format
 - [Operating model](operating-model.md)
 - [Transparency rules](transparency-rules.md)
 - [Project Memory](project-memory.md)

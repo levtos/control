@@ -3,6 +3,10 @@
 This is the canonical short Codex start bridge. Repository-local `AGENTS.md`
 files link here; they do not copy the detailed governance in `control/docs/`.
 
+The [working rules for agents](working-rules.md) are binding for autonomy,
+self-correction (up to 3 attempts), hard stops, test scope, backups, Issue
+format, and reports. Where this bootstrap is stricter, the working rules win.
+
 1. Use CTX first when it is available in the local environment. If it is not
    available, record that fact and continue without treating the absence as
    technical evidence.

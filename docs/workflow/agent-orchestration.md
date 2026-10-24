@@ -23,6 +23,9 @@ not decide the desired product state independently. A technical unknown is
 handled as a read-only evidence assignment, not as an implicit architecture
 decision.
 
+Claude (`levtos-claude`) may additionally review PRs and write assignment
+Issues for Benni; see working-rules.md.
+
 Exactly one of the two agents owns implementation for an Issue, recorded as
 `agent:codex` or `agent:claude`. This is per-Issue ownership, not a permanent
 repository lock; both agents may work in any active repository when assigned.
@@ -139,6 +142,7 @@ cleanup or broad audits.
 
 ## References
 
+- working-rules.md — autonomy, self-correction, hard stops, Issue format, reports.
 - operating-model.md — target and actual state, roles, and gates.
 - transparency-rules.md — Issue-first work and durable notes.
 - verification-and-efficiency.md — minimum verification by risk.
