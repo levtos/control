@@ -28,8 +28,9 @@ evidence).
 
 When a step fails, the agent analyses the cause, applies a correction, and
 tries again: at most **3 attempts per failing step**, each with a **new**
-correction. Re-running without a change is allowed only for an evident runner
-or network disturbance and counts as an attempt. After the third failed
+correction. Without a code change (timeout, network disturbance, or a flaky
+test), restart only failed CI jobs with `gh run rerun <id> --failed`, never the
+whole run. The retry counts as an attempt. After the third failed
 attempt the agent stops and posts its analysis on the Issue.
 
 ## Hard stops
@@ -41,6 +42,8 @@ Issue:
   weaker assertions, raised timeouts as the only measure, lower audit level).
   Changing a test is allowed only with evidence that the test itself is wrong;
   the evidence goes into the report.
+  Explicitly decided affected-path CI selection may omit unrelated jobs; it
+  must not omit applicable tests or replace the full pre-merge release gate.
 - Changing repository settings, branch protection, required checks, or secrets.
 - Changing product behaviour of contracts, fusions, freshness rules, state
   machines, or other truth logic beyond the decided scope.
@@ -67,6 +70,18 @@ The Issue states the size.
 Locally only focused tests for the changed parts plus lint, format, and type
 checks. The full suite runs in CI; the agent reads the result instead of
 repeating it locally. A release run does not need additional local testing.
+After a correction, rerun only affected tests or the failed tests (`pytest --lf`
+where appropriate). Do not repeat already green suites without a new change or
+an unresolved concern. CI runs only jobs affected by the changed paths where
+the repository provides a tested selector. Unknown paths fail closed; before
+merging a release, the complete required set must pass.
+
+## Release batching
+
+Collect non-blocking corrections and publish them with the next regular release.
+Create a separate fix release only when Benni is currently blocked. An explicit
+combined release assignment decides the release boundary. This rule does not
+remove the mandatory technical release chain or Benni's separate Live gate.
 
 ## Backups
 
