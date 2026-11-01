@@ -31,7 +31,10 @@ tries again: at most **3 attempts per failing step**, each with a **new**
 correction. Without a code change (timeout, network disturbance, or a flaky
 test), restart only failed CI jobs with `gh run rerun <id> --failed`, never the
 whole run. The retry counts as an attempt. After the third failed
-attempt the agent stops and posts its analysis on the Issue.
+attempt the agent stops and posts its analysis on the Issue. A slip in the
+agent's own command (typo, wrong variable or parameter name) whose fix is
+evident is corrected immediately and does not count as an attempt; attempts
+count only approaches that fail for a reason outside the agent's own slip.
 
 ## Hard stops
 
@@ -52,8 +55,10 @@ Issue:
   access, no changes to Home Assistant, MQTT, Zigbee2MQTT, other apps, or
   legacy integrations; never deleting data.
 - Printing or storing secrets (including tool calls that return app options
-  with secrets), committing real media titles or private data, switching the
-  GitHub account, or force-pushing a default branch.
+  with secrets), committing real media titles or private data, writing under
+  any GitHub account other than the agent's own, or force-pushing a default
+  branch. Switching **to** the agent's own account is allowed and expected
+  (see [agent orchestration](agent-orchestration.md#github-identity-preflight)).
 
 ## Size of an assignment
 

@@ -108,8 +108,10 @@ decided existing behavior unless the Issue explicitly changes it.
 
 Before every GitHub write, run `gh api user --jq .login` and require an exact
 match for the assigned agent: `agent:codex` → `levtos-codex`, `agent:claude` →
-`levtos-claude` (Benni → `Levtos-Acc`). On mismatch, do not write, run
-`gh auth switch`, or fall back to another account; report a blocker. See the
+`levtos-claude` (Benni → `Levtos-Acc`). On mismatch, switch to your own
+account (`gh auth switch --user <own account>`) and check again; never write
+under another account. If your own account is not signed in, stop and ask
+Benni to sign it in once. See the
 [identity detail rule](docs/workflow/agent-orchestration.md#github-identity-preflight).
 
 The GitHub actor must be recorded separately for commit author, push actor,

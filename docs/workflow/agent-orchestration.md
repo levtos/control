@@ -46,10 +46,13 @@ assigned to that agent. This applies to every write, including pushes, Issue
 and Project updates, PR creation or updates, merges, workflow dispatches, tags,
 and releases; an earlier session check does not replace this preflight.
 
-If the actor does not match, the agent must not perform the write, must not run
-`gh auth switch`, and must not fall back to another account. Report the identity
-mismatch as a blocker. If the check fails or the actor cannot be verified, the
-write is blocked as well.
+If the actor does not match, the agent switches to its own assigned account
+itself (`gh auth switch --user levtos-codex` or `--user levtos-claude`) and runs
+the check again before writing. Decided by Benni on 2026-11-01. The agent never
+writes under Benni's account or the other agent's account and never falls back
+to them. Only if its own account is not signed in on that machine, or the check
+still fails after switching, does the agent stop and ask Benni to sign the
+account in once.
 
 Commit author and GitHub actor remain distinct evidence. Record commit author,
 push actor, PR actor, merge actor, workflow actor, and release actor separately;
