@@ -12,9 +12,15 @@ format, and reports. Where this bootstrap is stricter, the working rules win.
    technical evidence.
 2. Classify the assignment: read-only evidence, decision clarification, or
    implementation of an already decided scope.
-3. Read the complete GitHub Issue, all comments, labels, and Project fields.
-4. Read ADR 0002, the relevant `control/docs/` pages, repository rules, and
-   the matching specification before technical work.
+3. Read the current Issue description, binding contract, labels and relevant
+   recent decisions/Project status first. Use the last verified checkpoint when
+   resuming. Follow explicitly linked governing comments and evidence; read
+   older historical comments only when a decision, contradiction, or dependency
+   requires it. If the authoritative contract is missing or uncertain, inspect
+   the complete history and report the ambiguity before building.
+4. Read ADR 0002, the central working rules, relevant `control/docs/` pages,
+   repository rules, and the matching specifications. Read only the relevant
+   sections of long files unless broader context is necessary for safety.
 5. Treat GitHub as the only active and historical work, evidence, and memory
    source.
 6. Confirm that the Issue contains an **Aktueller verbindlicher Vertrag**
@@ -46,6 +52,10 @@ format, and reports. Where this bootstrap is stricter, the working rules win.
     Live Verified.
 15. Keep local bridges short and repository-specific; do not duplicate
     detailed governance or feature logic in integration repositories.
+16. Apply the shared context-efficiency rules: one bounded work package at a
+    time, focused local tests, compact tool results, no CI polling loops, and
+    durable checkpoints before an expensive continuation. The complete required
+    CI and authorized technical release chain still have to finish.
 
 ## Mandatory HACS implementation closeout
 

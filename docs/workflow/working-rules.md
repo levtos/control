@@ -24,6 +24,50 @@ does it without asking, including:
 Everything the agent fixed on its own is listed in the report (what, why,
 evidence).
 
+Autonomy is limited to the assigned scope. An unrelated pre-existing failure,
+flaky check, or tooling defect is not a blanket permission to repair another
+subsystem. First classify whether the failure was caused by the current diff;
+if unrelated, record the evidence and do not broaden the scope. If causality
+is uncertain, investigate narrowly and stop at the relevant decision boundary.
+Required checks must never be bypassed to make a PR green.
+
+## Context, token budget, and work packages
+
+These efficiency rules apply to **all Levtos repositories** and to both Codex
+and Claude. They optimize effort, not correctness or the technical closeout.
+
+- Keep the Issue and release boundary intact, but divide large implementation
+  work into bounded, independently verifiable packages. One package has a
+  concrete change scope, expected files/interfaces, relevant tests, and a
+  completion condition. Multiple packages may share one Issue and one beta;
+  each may use a fresh agent session. Do not silently create additional Issues,
+  parallel owners, releases, or extra approval gates.
+- Start from the current binding Issue contract, linked decisions and last
+  verified checkpoint. Read code and specifications **on demand** for the
+  affected scope. Prefer targeted searches, symbol ranges and compact command
+  output over repeated full-file dumps, repository-wide scans, massive logs or
+  broad history rereads. This never excuses ignoring relevant dependencies,
+  security requirements or stateful semantics.
+- Keep tool output small: filter `gh` JSON to needed fields, inspect only
+  failing test details, and avoid repeatedly fetching unchanged PR/CI data.
+- A long session should consider a checkpoint and fresh session at about
+  **40 model requests or 120,000 context tokens**, if that telemetry is
+  available. These are **soft warning points**, not abort limits. Never abandon
+  a half-written change, a required check, or a safety-critical action merely
+  to meet them. If token counts are unavailable, do not waste tokens trying to
+  calculate them; checkpoint at natural package or interruption boundaries.
+- A checkpoint is short, durable and sufficient for continuation: Issue and
+  package, branch and last verified commit, changed paths, completed work,
+  tests/checks with their commit or run ID, failures and classification,
+  unresolved risks/decisions, and the exact next action. Record it on the
+  Issue or an explicitly linked versioned handoff; no secrets, private data,
+  or large raw logs. A resumed agent verifies the current branch/commit and
+  carries on from the checkpoint instead of starting a full new audit.
+- Record actual context/token or budget use when the provider exposes it,
+  without guessing billing from wall time or cached input tokens. Compare
+  comparable small assignments over time; efficiency targets are not release
+  or correctness gates.
+
 ## Self-correction
 
 When a step fails, the agent analyses the cause, applies a correction, and
@@ -62,7 +106,10 @@ Issue:
 
 ## Size of an assignment
 
-The Issue states the size.
+The Issue states the size. A beta/release can remain one planned outcome while
+its implementation is performed in smaller sequential packages and sessions.
+This does not waive design reviews, explicit Go decisions, or the full final
+release gate.
 
 - **Small** (fix, dependencies, tests, CI, documentation): build, green CI,
   merge, and release in one pass. No separate review or Go.
@@ -80,6 +127,23 @@ where appropriate). Do not repeat already green suites without a new change or
 an unresolved concern. CI runs only jobs affected by the changed paths where
 the repository provides a tested selector. Unknown paths fail closed; before
 merging a release, the complete required set must pass.
+
+Before running local tests, identify affected implementation paths, the direct
+module tests and any contract/integration tests needed for changes to shared
+interfaces, storage, quality, ordering, or restore behavior. Use a maintained
+module/test mapping if available; otherwise select conservatively and report
+why. UX-only changes do not trigger unrelated backend suites locally; a shared
+contract change may require tests from multiple domains. Do not disable tests,
+loosen assertions, or assume a passing selected set proves the full system.
+
+Start CI once for the current commit and retain the run URL/ID. Avoid repeated
+polling, `sleep` loops, and rereading entire successful logs inside a costly
+agent session. Prefer a controlled handoff while CI is running when continued
+waiting adds no useful work. Resume later to inspect the completed checks and
+finish the **same** authorized merge/release chain. For an infrastructure or
+flaky failure without a code change, retry only failed jobs as specified above;
+record the result. A failed mandatory check remains a blocker until resolved
+or explicitly decided; never merge around it.
 
 ## Release batching
 
