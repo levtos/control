@@ -152,6 +152,10 @@ Create a separate fix release only when Benni is currently blocked. An explicit
 combined release assignment decides the release boundary. This rule does not
 remove the mandatory technical release chain or Benni's separate Live gate.
 
+Every release contains a `CHANGELOG.md` entry for its new version, written in
+the same PR as the version change: what changed for Benni, in short German
+sentences. No entry, no release.
+
 ## Backups
 
 Agents do not create Home Assistant backups before installing an app update;
